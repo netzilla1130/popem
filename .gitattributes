@@ -1,0 +1,13 @@
+* text=auto
+*.gd text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.godot text eol=lf
+*.tscn text eol=lf
+*.import text eol=lf
+*.png binary
+*.ogg binary
+*.mp3 binary
+*.otf binary
+assets/fonts/LICENSES/** -whitespace
