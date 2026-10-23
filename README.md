@@ -21,6 +21,24 @@ godot --path . --rendering-method gl_compatibility
 
 Use your mouse or touchscreen to drag a launcher ball down or sideways, then release. Match its color to a target. From level 26, drag one primary color onto another to mix: red + yellow = orange, yellow + blue = green, red + blue = purple. The in-game tutorials explain new mechanics as they unlock.
 
+## Help test the first 10 minutes
+
+I'm looking for feedback on POP'EM!'s first-time experience. If you already use Godot, about 10 minutes of play after setup would help.
+
+Use the latest main branch, not the older v0.1.1-oss.1 release. Import project.godot in Godot 4.6.3 standard (non-.NET), wait for asset import, then press F5. This is a source-only test, not a prebuilt download or browser demo.
+
+Please try the first few levels and tell me:
+
+- Was it easy to launch and understand the introduction?
+- Were pulling, aiming, and releasing clear?
+- Where did the controls or difficulty become confusing?
+- Does returning to the menu and choosing NEW GAME correctly restart at level 1?
+- Is the text readable in your preferred UI language: English, Simplified Chinese, or Traditional Chinese?
+
+Report bugs at https://github.com/netzilla1130/popem/issues with your OS, Godot version, commit or download date, and reproduction steps. Screenshots help; please remove personal information before posting.
+
+You don't need to finish all 30 levels. One specific confusing moment is useful feedback.
+
 ## What's included
 
 - **30 levels** arranged in six groups of five.
