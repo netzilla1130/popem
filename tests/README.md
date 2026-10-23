@@ -4,6 +4,8 @@ Run the suite through `python tools/run_tests.py --godot <executable>` from the 
 
 The 24 probes were carried over from game development. They exercise menus and saved settings, level selection, tutorial retries, reward calculations, shot limits and decay, wall collisions, mixed colors and launcher limits, missiles, shields/spikes, crystal impacts, black-hole swallowing, power-up purchase/help flows, furball behavior, and the end-of-demo dialog.
 
+A 25th probe checks canceled touch gestures: ordinary and mixed-color pulls must not fire, and canceled power-up taps must not spend coins. Genuine releases must still fire and buy normally afterward. These events are supplied to the game's input handler; this does not replace physical touchscreen testing.
+
 The runner copies the project into an ignored `.test-runs/run-*/project` directory. **Only inside that disposable copy**, it changes `SAVE_PATH` from `user://popem_progress.cfg` to `res://test_progress.cfg` and gives the project a test-specific name. It removes that exact test save between probes. Runtime logs are also redirected into the run directory. The original source and player progress are left intact.
 
 Windows AppData and Linux XDG directories are redirected for the child process only, so editor preferences and caches are isolated as well. The probes stop audio playback and release their scene before quitting; gameplay assertions are unchanged from the original development probes. Windows console-wrapper paths are resolved to the sibling engine executable when available so timeouts can stop the actual process.

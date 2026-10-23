@@ -28,7 +28,7 @@ Use your mouse or touchscreen to drag a launcher ball down or sideways, then rel
 - English, Simplified Chinese, and Traditional Chinese menus and help.
 - Local progress, level selection, earned coins, and volume settings. Coins are in-game rewards; this source edition contains no payment integration.
 - Custom ball simulation, procedural impact sounds, particles, and animated UI.
-- 24 existing regression probes covering gameplay, menus, progression, and power-ups.
+- 25 regression probes covering gameplay, menus, progression, power-ups, and canceled touch gestures.
 
 This is the initial public source edition of the existing 30-level game. The game still uses the original “demo complete” end screen. Further levels and a full commercial release are not promised by this repository.
 

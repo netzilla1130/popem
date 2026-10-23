@@ -825,6 +825,12 @@ func _notification(what: int) -> void:
 		queue_redraw()
 
 func _input(event: InputEvent) -> void:
+	# A canceled system gesture is not a release to fire or buy a power-up.
+	if event is InputEventScreenTouch and event.canceled:
+		_clear_drag()
+		queue_redraw()
+		return
+
 	if menu_active:
 		if _is_primary_press(event):
 			var menu_press_position := _primary_press_position(event)
