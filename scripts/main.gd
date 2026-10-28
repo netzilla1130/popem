@@ -602,6 +602,7 @@ var invalid_prompt_timer := 0.0
 var invalid_prompt_text := ""
 var prompt_at_launcher := false
 var drag_active := false
+var active_touch_index := -1
 var drag_color := ""
 var drag_position := Vector2.ZERO
 var drag_raw_position := Vector2.ZERO
@@ -825,6 +826,21 @@ func _notification(what: int) -> void:
 		queue_redraw()
 
 func _input(event: InputEvent) -> void:
+	# Handle the physical event once, without its mouse/touch emulation copy.
+	if event.device == InputEvent.DEVICE_ID_EMULATION:
+		return
+	# Only the finger that began a launcher or power-up gesture may finish it.
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			if active_touch_index != -1 and event.index != active_touch_index:
+				return
+		else:
+			if event.index != active_touch_index:
+				return
+			active_touch_index = -1
+	elif event is InputEventScreenDrag and event.index != active_touch_index:
+		return
+
 	# A canceled system gesture is not a release to fire or buy a power-up.
 	if event is InputEventScreenTouch and event.canceled:
 		_clear_drag()
@@ -896,11 +912,15 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if _handle_powerup_input(event):
+		if event is InputEventScreenTouch and event.pressed:
+			active_touch_index = event.index
 		return
 
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			_begin_drag(event.position)
+			if drag_active:
+				active_touch_index = event.index
 		else:
 			_release_drag(event.position)
 	elif event is InputEventScreenDrag:
@@ -1947,6 +1967,7 @@ func _start_level() -> void:
 	_clear_floating_texts()
 	drag_active = false
 	drag_color = ""
+	active_touch_index = -1
 	tutorial_step = 0
 	level_complete = false
 	level_complete_pending = false
@@ -2274,6 +2295,7 @@ func _release_drag(position: Vector2) -> void:
 		_launch_color(color_name, tension, launch_direction)
 
 func _clear_drag() -> void:
+	active_touch_index = -1
 	if charging_player != null and charging_player.playing:
 		charging_player.stop()
 	drag_active = false
