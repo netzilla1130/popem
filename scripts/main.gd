@@ -4162,6 +4162,9 @@ func _check_level_failed() -> void:
 		return
 	if _has_active_launcher_balls():
 		return
+	# Paid attacks still in flight must resolve before the failure dialog pauses play.
+	if not pending_color_bombs.is_empty():
+		return
 	level_failed = true
 	_clear_drag()
 	_layout_level_failed_dialog()

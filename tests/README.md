@@ -4,6 +4,8 @@ Run the suite through `python tools/run_tests.py --godot <executable>` from the 
 
 The 24 probes were carried over from game development. They exercise menus and saved settings, level selection, tutorial retries, reward calculations, shot limits and decay, wall collisions, mixed colors and launcher limits, missiles, shields/spikes, crystal impacts, black-hole swallowing, power-up purchase/help flows, furball behavior, and the end-of-demo dialog.
 
+The failure-dialog probe also checks that a queued paid color bomb finishes after the final shot expires: clearing the last target completes the level, while surviving targets still trigger failure after the bomb resolves.
+
 A 25th probe checks canceled touch gestures: ordinary and mixed-color pulls must not fire, and canceled power-up taps must not spend coins. Genuine releases must still fire and buy normally afterward. These events are supplied to the game's input handler; this does not replace physical touchscreen testing.
 
 A 26th probe checks touch ownership: a second finger must not change, release, or cancel an active launcher gesture or complete another finger's power-up purchase. It also checks mixed-color shots, normal releases, cancellation recovery, mouse input, emulated-event filtering, and returning through the menu. Like the cancellation probe, it supplies events to the input handler and does not replace physical touchscreen testing.
